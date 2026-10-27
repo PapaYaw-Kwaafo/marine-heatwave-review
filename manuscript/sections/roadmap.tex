@@ -1,0 +1,89 @@
+% sections/roadmap.tex
+\section{A practical roadmap}\label{sec:roadmap}
+
+The synthesis identifies what the literature does; the simulation shows what some of those choices cost. This section turns both into practice. The workflow, the reporting standards and the pitfalls table are implemented in the companion repository, so that each recommendation can be checked against running code rather than taken on trust.
+
+\subsection{A seven step workflow}\label{sec:workflow}
+
+\paragraph{1. State the inferential target before touching data.}
+Attribution (did this event change this population?), effect estimation (by how much per unit of exposure?) and forecasting (what happens under the next event?) call for different model classes, different validation schemes and different reporting. Table~\ref{tab:frameworks} maps targets to classes. Declaring the target first prevents the most common failure in the reviewed literature, which is to fit an association model because the data permit it and then interpret its coefficient as if it were a forecast.
+
+\paragraph{2. Detect events from a reproducible temperature source with stated parameters.}
+Use a maintained detection implementation and report the data product, its version, the climatology window, the percentile, the minimum duration and the gap rule. Verify the implementation against a documented event before use; this review's verification found that figures circulating for the 2011 Western Australian event did not match the canonical algorithm's output on the same data, which would have propagated into every downstream number had the check been skipped. Report at least one alternative baseline (Online Resource 1, Table S5 gives the template).
+
+\paragraph{3. Compute exposure metrics that span the dimensions the biology may respond to.}
+Peak anomaly, mean anomaly, cumulative intensity, days above threshold and onset timing capture severity, integrated dose and phenological alignment respectively. Choosing a single metric for convenience risks discarding the dimension the population responds to; the biological rationale for any narrower choice should be stated in advance.
+
+\paragraph{4. Align exposure to the response cadence without discarding lag structure.}
+Where the response is annual, carry exposure for the current and at least two preceding years as separate covariates, and where life stages are known, compute exposure over stage specific windows. The simulation puts a number on the cost of aggregating away the lag.
+
+\paragraph{5. Fit at least one model from each of two classes.}
+An inference oriented model that returns an interpretable coefficient with a defensible interval, and a prediction oriented model evaluated on held out data. The simulation shows that these are not the same model, and reporting only one leaves the reader unable to judge the other property.
+
+\paragraph{6. Validate with structure respecting schemes and diagnose residual dependence.}
+Hold out contiguous years or contiguous sites rather than random observations \citep{roberts2017}, and report residual temporal and spatial autocorrelation. A significant residual Moran's $I$ from an association model is a direct signal that a structured dependence model should be considered.
+
+\paragraph{7. Deposit code, exposure layers and session information.}
+Derived exposure layers are the expensive and irreproducible part of most analyses; depositing them with the detection parameters allows others to reuse the exposure while fitting alternative response models.
+
+\subsection{Minimum reporting standards}\label{sec:reporting}
+
+Table~\ref{tab:reporting} lists nine items that a reviewer can check. They are framed as disclosures rather than prescriptions: a study may defensibly use a 10 year baseline or a single exposure metric, but it should say so and say why. Items 5 and 6 are elevated by the simulation evidence: unreported lag handling and untested curvature are the two choices with the largest measured consequences for the estimated effect.
+
+\begin{table}[H]
+\centering
+\caption{Minimum reporting standards for MHW impact studies. Items 5 and 6 are rated critical on the basis of the simulation in Section~\ref{sec:results}.}
+\label{tab:reporting}
+\small
+\begin{tabular}{clp{9.2cm}}
+\toprule
+ & Item & What to report \\
+\midrule
+1 & Exposure source & Product, version, native resolution, any regridding, and whether the climatology is the provider's or the analyst's \\
+2 & Baseline & Window, fixed or shifting, and at least one sensitivity baseline \\
+3 & Event definition & Percentile, minimum duration, gap rule, smoothing window; implementation and version \\
+4 & Exposure metrics & Which of peak, mean, cumulative, duration and onset were used, and the biological rationale for the choice \\
+5 & Lag structure (critical) & Whether a lag was assumed, tested or estimated; lags probed; full lag profile if a distributed lag model was used \\
+6 & Curvature (critical) & Whether non linearity was tested; the basis and its dimension if a smooth was used \\
+7 & Validation & Scheme (temporal block, spatial block, rolling origin); held out metric; residual autocorrelation test \\
+8 & Model classes & At least one inference oriented and one prediction oriented model, with the estimand of each stated \\
+9 & Code and data & Repository, session information, deposited exposure layers \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Pitfalls and remedies}\label{sec:pitfalls}
+
+Table~\ref{tab:pitfalls} collects the recurring errors in the reviewed literature together with the remedy that the workflow supplies. Severity ratings for the first two rows are quantitative, taken from the simulation; the remainder are qualitative judgements grounded in the synthesis.
+
+\begin{table}[H]
+\centering
+\caption{Recurring pitfalls, their consequence, and the remedy supplied by the workflow. Severity: critical, where the simulation measured a consequence large enough to reverse a study's conclusion; high, where the synthesis found the practice common and the consequence well established; moderate otherwise.}
+\label{tab:pitfalls}
+\small
+\begin{tabular}{p{3.4cm}p{1.6cm}p{4.6cm}p{4.6cm}}
+\toprule
+Pitfall & Severity & Consequence & Remedy \\
+\midrule
+Contemporaneous exposure when the response is lagged & Critical & Effect magnitude under estimated by \naiveRelBiasLagOne{}\% at a one year lag in the simulation; apparent null results & Carry lagged exposure covariates; fit a distributed lag model where the series permits (steps 4 and 5) \\
+\addlinespace
+Linear exposure term when the response saturates & Critical & Systematic bias of fixed sign and nominal intervals that cover the truth in \linearCoverageRange{} of scenarios & Test a smooth or quadratic term; report the test (step 6) \\
+\addlinespace
+Unreported or inherited baseline & High & Effect sizes not comparable across studies; the same event yields different intensities under different windows & Report the window and a sensitivity baseline (step 2) \\
+\addlinespace
+Single exposure metric chosen for convenience & High & The dimension the biology responds to may be the one discarded & Compute the full metric set; justify any subset (step 3) \\
+\addlinespace
+Random cross-validation on autocorrelated data & High & Inflated apparent skill; over confident forecasts & Block in time or space; report residual autocorrelation (step 6) \\
+\addlinespace
+A single model class reported & High & Coefficient quality and forecast quality cannot both be judged & Fit one model from each class (step 5) \\
+\addlinespace
+Laboratory thresholds used as field predictors & Moderate & Interacting stressors and behaviour alter field outcomes & Treat thresholds as mechanistic inputs or priors, not forecasts \\
+\addlinespace
+Methods described in prose only & Moderate & Results cannot be re-implemented; practice does not diffuse & Deposit code and exposure layers (step 7) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{What is missing}\label{sec:gaps}
+
+Five gaps limit what any workflow can deliver. Sub annual biological data are the first: the cadence mismatch between daily temperature and annual or seasonal biology is what makes lag estimation hard, and standardised monthly larval surveys, weekly environmental DNA series \citep{gold2024} and telemetry would close it more cheaply than any new method. Grid aligned response products are the second: fishery and survey data at management zone resolution cannot be combined with spatial random field models without an explicit downscaling step, and agencies that publish grid aligned products remove that barrier. Cold anomaly and compound event metrics are the third: fewer than 1\% of studies considered cold events, and the simulation's coverage result applies with greater force where multiple stressors are modelled as one. Intermediate complexity models that embed a single mechanistic constraint, such as a laboratory derived thermal performance curve, inside a correlative framework are the fourth; the components exist in current software but worked examples are rare. Empirical datasets from tropical and Global South regions are the fifth, and the cross regional consistency of the simulation results indicates that this gap is one of data rather than of method.

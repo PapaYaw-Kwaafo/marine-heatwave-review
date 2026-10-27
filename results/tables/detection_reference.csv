@@ -1,0 +1,4 @@
+"region","n_events","top_by","date_start","date_end","duration","intensity_max","intensity_mean","intensity_cumulative","mean_i_cum","heatwaveR_version","R_version","generated"
+"WA",76,"intensity_max","2011-02-06","2011-04-06",60,6.506,3.2119,192.7145,19.613,"1.0.0","4.3.3","2026-10-23"
+"NW_Atl",114,"intensity_max","2020-06-22","2020-07-03",12,5.1903,2.7816,33.3787,49.4627,"1.0.0","4.3.3","2026-10-23"
+"Med",119,"intensity_max","2017-06-10","2017-06-27",18,5.5064,3.6073,64.9321,40.275,"1.0.0","4.3.3","2026-10-23"

@@ -1,0 +1,12 @@
+results/panels*/*.tmp
+logs/*.log
+manuscript/*.aux
+manuscript/*.bbl
+manuscript/*.blg
+manuscript/*.fls
+manuscript/*.fdb_latexmk
+manuscript/*.out
+manuscript/*.toc
+manuscript/build_*.log
+.Rhistory
+.RData

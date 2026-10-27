@@ -1,0 +1,10 @@
+{
+  "title": "mhw-R-audit: simulation based evaluation of modelling frameworks for marine heatwave impact assessment",
+  "description": "Pure R factorial Monte Carlo (108 scenarios x 10 replicates) comparing six model classes for marine heatwave impact estimation on responses simulated from real NOAA OISST series via heatwaveR. Companion to a review submitted to Reviews in Fish Biology and Fisheries.",
+  "version": "2.0.0",
+  "upload_type": "software",
+  "license": "MIT",
+  "creators": [{"name": "Afrifa-Yamoah, Ebenezer", "affiliation": "Edith Cowan University", "orcid": "0000-0003-1741-9249"}],
+  "keywords": ["marine heatwaves", "heatwaveR", "dlnm", "sdmTMB", "Monte Carlo", "fisheries", "R"],
+  "access_right": "open"
+}

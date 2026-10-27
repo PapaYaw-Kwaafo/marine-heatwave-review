@@ -1,0 +1,230 @@
+% =============================================================================
+% supplement.tex -- Online Resource 1
+% Compile: latexmk -pdf supplement.tex
+% =============================================================================
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=22mm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+% \usepackage{lmodern}  % uncomment if the lmodern package is installed
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{float}
+\usepackage{caption}
+\usepackage[authoryear,round]{natbib}
+\usepackage[hidelinks]{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\graphicspath{{figures/}}
+% panel helper: letter set in the document, not inside the image
+\newcommand{\panel}[3]{\begin{minipage}[t]{#2}\raggedright\textbf{(#1)}\\[2pt]\includegraphics[width=\linewidth]{#3}\end{minipage}}
+
+\captionsetup{labelfont=bf,labelsep=space,font=small}
+\renewcommand{\figurename}{Fig.}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\bibliographystyle{plainnat}  % submit with spbasic (Springer); plainnat used for local build
+\setcitestyle{aysep={}}
+\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true,frame=single,columns=fullflexible,
+        backgroundcolor=\color{gray!8},language=R,keywordstyle=\color{blue!60!black},commentstyle=\color{gray!60!black}}
+\input{results.tex}
+\input{supp_tables.tex}
+
+\begin{document}
+\begin{center}
+{\Large\bfseries Online Resource 1}\\[4pt]
+{\large Supplementary material for}\\[2pt]
+{\large\itshape Marine heatwave impact assessment on marine fauna and fisheries: a methodological synthesis and a simulation based evaluation of modelling frameworks}\\[4pt]
+Ebenezer Afrifa-Yamoah, Edith Cowan University\\[2pt]
+\texttt{e.afrifayamoah@ecu.edu.au}
+\end{center}
+
+\tableofcontents
+\clearpage
+
+\section{Literature synthesis: supporting figures}
+
+\subsection{Study selection}
+Figure~\ref{fig:prisma} gives the PRISMA flow. Initial searches returned 4,869 records (Web of Science 2,182; Scopus 1,674; ScienceDirect 1,013), of which 1,559 were duplicates (45 identified manually, 1,514 by Covidence). Title, abstract and keyword screening of the remaining 3,310 records removed 2,089 as irrelevant (physical processes only; reviews, qualitative or descriptive pieces; not marine or estuarine). Of the 1,221 full texts assessed, 138 were excluded (not in English; habitat or plant studies; inaccessible), leaving 1,083 studies for the contextual synthesis, of which 76 met the additional criteria for the MHW specific analytical subset.
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.9\textwidth]{lit_prisma}
+\caption{PRISMA flow diagram for the literature search, screening and inclusion. Left column, records retained at each stage; right column, records removed and the reason.}
+\label{fig:prisma}
+\end{figure}
+
+\subsection{Temporal dynamics of the literature}
+MHW specific impact research grew steadily from 2016, peaked in 2021 with 18 studies, and has remained at 11 to 13 studies a year since (Fig.~\ref{fig:temporal}a). Citations peaked in 2021 (601) and have declined for more recent years, as expected from citation lag. The growth coincided with wider availability of satellite derived sea surface temperature and with standardised event detection software, which lowered the technical barrier to linking exposure to biological responses. Across response families, Population/Demography and Physiology/Bioenergetics drove the growth, expanding from minimal activity in 2016 to 2017 to peaks in 2021 before declining; Distribution/Range/Phenology followed a more moderate trajectory peaking around 2021 to 2022; Community/Ecosystem studies remained low and Fisheries/Economics endpoints were rarely addressed (Fig.~\ref{fig:temporal}b). The 2021 peak followed the 2014 to 2016 Northeast Pacific event, the 2015 to 2016 Tasman Sea event and the 2016 Great Barrier Reef bleaching. Whether the subsequent decline reflects an event driven research cycle or consolidation around established methods cannot be resolved from counts alone.
+
+\begin{figure}[H]\centering
+\panel{a}{0.52\textwidth}{lit_publications_citations}\hfill\panel{b}{0.46\textwidth}{lit_family_by_year}
+\caption{Temporal dynamics of the MHW impact literature. (a) Annual number of publications (bars) and citations received (line), 2016 to 2025. (b) Number of studies by publication year and response family.}
+\label{fig:temporal}
+\end{figure}
+
+\subsection{Collaboration structure}
+Collaboration is organised around a small number of hubs (Fig.~\ref{fig:network}a). NOAA and the University of Western Australia are the most central institutions, each embedded in a dense regional cluster: the University of Tasmania, the Australian Institute of Marine Science, CSIRO and Curtin University form a coherent Australian hub, while NOAA anchors an extensive North American network of universities and federal agencies. CNRS (France), Fisheries and Oceans Canada and IMEDEA (Spain) act as secondary connectors between otherwise distinct clusters. At national scale the United States is the principal connector, with Australia, Canada, Spain and France as secondary hubs and China, Switzerland and Portugal showing substantial international linkages (Fig.~\ref{fig:network}b). The network is sparse beyond the hubs, which is consistent with the slow diffusion of specialised methods into regions without sustained institutional capacity.
+
+\begin{figure}[H]\centering
+\panel{a}{0.92\textwidth}{lit_network_institutions}\\[6pt]
+\panel{b}{0.5\textwidth}{lit_network_countries}
+\caption{Collaboration landscape of MHW impact studies. (a) Institutional co authorship network drawn in VOSviewer; node size is publication output, edge thickness is collaboration strength and colour identifies the cluster. (b) International co authorship as a chord diagram; ribbon width is the number of shared studies. Institutional acronyms are defined in Table~\ref{tab:acronyms}.}
+\label{fig:network}
+\end{figure}
+
+\section{Literature search and classification}
+
+\subsection{Search strings}
+Table~\ref{tab:search} reproduces the search string run in each of the three primary databases. In Web of Science and Scopus six term groups were combined with AND: marine heatwave terminology (including the broader terms ocean warming and climate change), a marine scope term, impact descriptors, biological endpoints, the taxonomic term fish*, and methodological terms; terms within a group were combined with OR and truncated. Publication years were restricted to 2010 to 2025 through the PY field in Web of Science and PUBYEAR limits in Scopus. ScienceDirect, whose query syntax does not support truncation or long nested Boolean strings, was searched with a reduced string of four groups. Google Scholar and NOAA repositories were searched with the core terms as supplementary sources and were not counted in the record totals. Title and abstract screening was conducted independently by three reviewers and full text assessment by two; conflicts at either stage were resolved by consensus through discussion with the wider author group and re evaluation against the inclusion criteria. Record counts are those at retrieval; 1,559 duplicates were removed before screening (Fig.~\ref{fig:prisma}).
+
+\input{supp_search_table.tex}
+
+\subsection{Response term mapping}
+Free text descriptors in each study's response field were mapped to a controlled vocabulary of sub metrics and then to five response families (Population/Demography, Physiology/Bioenergetics, Distribution/Range/Phenology, Community/Ecosystem, Fisheries/Economics) with the curated regular expressions in Table~\ref{tab:regex}. Response text was pre processed (lower cased, Unicode normalised, punctuation standardised) before matching. A study measuring several responses could match several sub metrics; disambiguation rules resolved the recurring ambiguities, in particular fishery dependent abundance (CPUE, landings, effort) against economic outcomes, and spatial behaviour (home range, space use) against non spatial behaviour (activity, foraging). The rule set is deposited with the repository as \texttt{data/literature/response\_term\_mapping.csv} and the table is typeset from that file, so every assignment can be re run.
+
+\input{supp_regex_table.tex}
+
+\subsection{Institutional acronyms}
+\begin{table}[H]\centering
+\caption{Institutional acronyms used in Fig.~\ref{fig:network}.}
+\label{tab:acronyms}\small
+\begin{tabular}{ll}\toprule
+Acronym & Institution \\\midrule
+AIMS & Australian Institute of Marine Science \\
+CNRS & Centre National de la Recherche Scientifique, France \\
+CSIRO & Commonwealth Scientific and Industrial Research Organisation, Australia \\
+DFO & Fisheries and Oceans Canada \\
+IMEDEA & Mediterranean Institute for Advanced Studies, Spain \\
+NOAA & National Oceanic and Atmospheric Administration, United States \\
+UCSC & University of California, Santa Cruz \\
+UTAS & University of Tasmania \\
+UWA & University of Western Australia \\
+\bottomrule\end{tabular}\end{table}
+
+\section{Detection verification and sensitivity}
+
+\subsection{Reference values}
+Table~\ref{tab:detref} gives the characteristics of the most intense event (by peak anomaly) in each of the three real OISST series under the Hobday defaults, as computed by heatwaveR \heatwaveRVersion{} on R \rVersion{}. These are the reference values against which the repository's test suite checks; they are regenerated on the analyst's machine by \texttt{scripts/verify\_detection.R}.
+
+\detectionReferenceTable
+
+\subsection{Sensitivity of the 2011 Western Australian event}
+Table~\ref{tab:detsens} shows how the 2011 event's characteristics change across three climatology windows and two percentile thresholds. The event is robust to the 95th percentile and to extending the window to 2022, but under a 1982 to 2011 window at the 90th percentile the detection algorithm joins the 2011 anomaly to a different event structure and the largest 2011 event by peak anomaly becomes a short November event. This is the sensitivity that item 2 of the reporting standards asks authors to disclose.
+
+\detectionSensitivityTable
+
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth]{fig_detection_wa_series}
+\caption{Daily OISST for the Western Australian series, 1982 to 2022 (black), the 90th percentile threshold (dashed grey) and exceedance above threshold (shaded) for every detected event. The 2011 event is the tallest exceedance; the 1999 event, longer but lower, is the largest by cumulative intensity.}
+\label{fig:detection}
+\end{figure}
+
+\section{Data generating process calibration}
+Table~\ref{tab:dgp} reports the realised response distribution for every combination of true effect and true lag on one 9 site and one 25 site panel per region (range 50 km, replicate 1). All cells are usable: no cell has more than 90\% zeros, fewer than five distinct values, or an implausible mean.
+
+\dgpCalibrationTable
+
+\section{Full simulation results}
+This section gives every aggregation of the simulation output on which the main text draws. All tables are generated from \texttt{results/tables/} by \texttt{scripts/make\_supp\_tables.R}; the raw file \texttt{R\_raw\_results.csv} (one row per model fit) is deposited with the repository. Model classes are described in Table 4 of the main text; the estimand reported as $\hat\beta_1$ differs between classes as stated there.
+
+\subsection{Model level summary}
+Table~\ref{tab:modsum} averages over all \nScenarios{} scenarios. The ordering by RMSE places the two GLMs ahead of the DLNM because their estimates, although biased, vary little across replicates; the ordering by mean bias places the DLNM first. Coverage and log score are averaged only over scenarios where the quantity is defined (no interval for the random forest; no proper predictive density for the quasi Poisson DLNM). The sdmTMB row summarises the \sdmtmbPanelsN{} panels on which that model was run.
+\modelSummaryTable
+
+\subsection{Bias by true lag}
+Table~\ref{tab:biaslag} is the breakdown behind Fig.~5 of the main text. The naive GLM's bias changes sign between lag 0 and lag 1 and stays at that level at lag 2; the lag-1 GLM shows the mirror image, small at lag 1 and large at lags 0 and 2; the DLNM's bias stays within a narrow band at all three lags but with a larger standard deviation across replicates.
+\biasByLagTable
+
+\subsection{Relative bias by true effect and lag}
+Table~\ref{tab:relbias} expresses the same biases as a percentage of the true coefficient (Fig.~6 of the main text). Because the absolute bias under lag misspecification is approximately constant, the percentage is largest for the smallest true effect ($\beta_1 = -0.04$), where the naive GLM's estimate can exceed the true magnitude in the wrong direction at lag 0 and vanish entirely at lags 1 and 2.
+\relativeBiasTable
+
+\subsection{Bias by region}
+Table~\ref{tab:biasregion} is the breakdown behind Fig.~9 of the main text. Regional exposure distributions differ substantially (mean annual cumulative intensity of roughly 20, 50 and 40\,$^{\circ}$C days for the Western Australian, Northwest Atlantic and Mediterranean series; Table~\ref{tab:dgp}), yet the bias of each model class is nearly constant across regions, which is what is expected when the bias arises from the model's temporal assumption rather than from the exposure values.
+\biasByRegionTable
+
+\subsection{Bias by grid size and spatial range}
+Table~\ref{tab:biasgeom} splits the results by the two spatial design factors. Neither factor changes the bias of any class detectably. The number of sites changes precision (RMSE falls from 9 to 25 sites for the classes whose estimates are unbiased at the correct lag), and the correlation range changes nothing, because the site effects absorb the correlated component of the exposure noise.
+\biasByGeometryTable
+
+\subsection{Convergence and runtime}
+Table~\ref{tab:runreport} is the run report printed by \texttt{scripts/aggregate.R}. The percentage returning an estimate and the percentage passing the package's own convergence check are reported separately: a fit that triggered a warning (for the GLMs, typically the theta iteration limit in \texttt{glm.nb}; for sdmTMB, a non positive definite Hessian reported by \texttt{sanity()}) was retained with its estimate and counted as not converged, rather than being dropped. Median runtime per fit is on one core; package versions are given in Section 3.3 of the main text and the full \texttt{sessionInfo()} output is deposited with the repository as \texttt{results/tables/sessionInfo.txt}.
+\runReportTable
+
+\subsection{Additional figures}
+Figures~\ref{fig:srmse} and \ref{fig:smorans} complement the main text figures. The RMSE figure shows the precision cost of the DLNM's robustness: its boxes are wider than the correctly lagged GLM's at every lag. The Moran's $I$ figure shows that residual spatial autocorrelation is small and slightly negative for every regression class on both independent and correlated panels, which confirms that the correlated exposure noise is absorbed by the site effects and leaves no spatial structure for a random field model to explain.
+
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth]{fig_rmse}
+\caption{Root mean squared error of the estimated exposure coefficient by model class and true lag; each box summarises one third of the \nScenarios{} scenarios. Colours identify model classes consistently with the main text.}
+\label{fig:srmse}
+\end{figure}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.8\textwidth]{fig_morans}
+\caption{Residual Moran's $I$ of site mean residuals by model class, for spatially independent panels and panels with a 50 km correlation range.}
+\label{fig:smorans}
+\end{figure}
+
+\section{Repository structure and reproduction}
+\begin{lstlisting}[language={}]
+mhw-R-audit/
+  R/00_config.R      design constants, seeds, paths
+  R/01_detection.R   heatwaveR wrappers
+  R/02_exposure.R    annual metrics, lag panels
+  R/03_panel.R       OISST loader, Matern spatial panel
+  R/04_dgp.R         response simulator, degeneracy checks
+  R/05_models.R      six fitters, unified return interface
+  R/06_runner.R      resumable checkpointed runner
+  R/07_aggregate.R   summaries, run report
+  scripts/verify_detection.R    RUN FIRST: reference values
+  scripts/diagnose_dgp.R        RUN SECOND: calibration check
+  scripts/run_chunk.R           one array task
+  scripts/aggregate.R           summaries
+  scripts/make_figures.R        figures
+  scripts/make_results_macros.R manuscript macros
+  scripts/make_main_tables.R    main text tables
+  scripts/make_supp_tables.R    supplement tables
+  scripts/make_literature_tables.R  Tables S1 and S2 from data/literature
+  scripts/prepare_literature_figures.R  stage the synthesis figure panels
+  data/literature/search_strategy.csv          search strings (Table S1)
+  data/literature/response_term_mapping.csv   response term rules (Table S2)
+  hpc/slurm_array.sh, hpc/pbs_array.sh, hpc/run_local_parallel.sh
+  tests/testthat/test-detection.R
+  manuscript/main.tex, supplement.tex, refs.bib
+\end{lstlisting}
+
+Reproduction on a workstation:
+\begin{lstlisting}[language=bash]
+export MHW_ROOT=$PWD
+Rscript install/install_packages.R --all
+Rscript scripts/verify_detection.R
+Rscript scripts/diagnose_dgp.R
+Rscript -e 'library(testthat); test_dir("tests/testthat")'
+bash hpc/run_local_parallel.sh 8
+Rscript scripts/make_results_macros.R
+cd manuscript && latexmk -pdf main.tex supplement.tex
+\end{lstlisting}
+
+\section{Model fitter interface}
+Every fitter in \texttt{R/05\_models.R} returns the same fields, so that a new model can be added without changing the runner:
+\begin{lstlisting}
+fit_<model>(d)   # d: y, site, year, X, Y, i_cum, i_cum_lag0..3, mhw_days
+# returns list(model_id, beta1_hat, beta1_lo, beta1_hi,
+#              log_score, morans_I, converged, runtime_sec, note)
+\end{lstlisting}
+The sdmTMB fitter illustrates the convention for convergence reporting: warnings are muffled rather than treated as failure, and the package's own \texttt{sanity()} verdict is recorded so that flagged fits enter the run report rather than vanishing as missing rows.
+\begin{lstlisting}
+m <- withCallingHandlers(
+  sdmTMB::sdmTMB(y ~ i_cum_lag1, data = tr, mesh = mesh, time = "year",
+                 family = sdmTMB::nbinom2(link = "log"),
+                 spatial = "on", spatiotemporal = "ar1", silent = TRUE),
+  warning = function(w) invokeRestart("muffleWarning"))
+converged <- isTRUE(sdmTMB::sanity(m, silent = TRUE)$all_ok)
+\end{lstlisting}
+
+\bibliography{refs}
+\end{document}

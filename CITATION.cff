@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the article and this repository."
+type: software
+title: "mhw-R-audit: simulation based evaluation of modelling frameworks for marine heatwave impact assessment"
+version: "2.0.0"
+date-released: "2026-10-23"
+license: MIT
+authors:
+  - family-names: Afrifa-Yamoah
+    given-names: Ebenezer
+    affiliation: Edith Cowan University
+    orcid: "https://orcid.org/0000-0003-1741-9249"
+repository-code: "https://github.com/EAfrifa-Yamoah/mhw-R-audit"
+keywords: [marine heatwaves, heatwaveR, distributed lag models, sdmTMB, Monte Carlo, fisheries]
+preferred-citation:
+  type: article
+  title: "Marine heatwave impact assessment on marine fauna and fisheries: a methodological synthesis and a simulation based evaluation of modelling frameworks"
+  authors:
+    - family-names: Afrifa-Yamoah
+      given-names: Ebenezer
+  journal: "Reviews in Fish Biology and Fisheries"
+  year: 2026
+  notes: "Submitted."

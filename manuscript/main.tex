@@ -1,0 +1,79 @@
+% =============================================================================
+% main.tex -- Reviews in Fish Biology and Fisheries submission
+% Compile: latexmk -pdf main.tex
+% Structure: 1 Introduction | 2 Literature synthesis (methods + findings)
+%            3 Simulation study (design + results) | 4 Roadmap | 5 Discussion
+% Springer's sn-jnl class can replace the preamble at submission.
+% =============================================================================
+\documentclass[12pt,a4paper]{article}
+\usepackage[margin=25mm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+% \usepackage{lmodern}  % uncomment if the lmodern package is installed
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{setspace}
+\usepackage{lineno}
+\usepackage[authoryear,round,sort]{natbib}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+\graphicspath{{figures/}}
+% panel helper: letter set in the document, not inside the image
+\newcommand{\panel}[3]{\begin{minipage}[t]{#2}\raggedright\textbf{(#1)}\\[2pt]\includegraphics[width=\linewidth]{#3}\end{minipage}}
+
+\captionsetup{labelfont=bf,labelsep=space,font=small}
+\renewcommand{\figurename}{Fig.}
+\bibliographystyle{plainnat}  % submit with spbasic (Springer); plainnat used for local build
+\setcitestyle{aysep={}}
+\doublespacing
+\linenumbers
+
+% Numbers and generated tables come from the R scripts; nothing is typed by hand.
+\input{results.tex}
+\input{main_tables.tex}
+
+\begin{document}
+
+\title{Marine heatwave impact assessment on marine fauna and fisheries: a methodological synthesis and a simulation based evaluation of modelling frameworks}
+\author{Ebenezer Afrifa-Yamoah\\[2pt]
+\small School of Science, Edith Cowan University, Joondalup, Western Australia, Australia\\
+\small Centre for Marine Ecosystems Research, Edith Cowan University\\
+\small \texttt{e.afrifayamoah@ecu.edu.au} \quad ORCID 0000-0003-1741-9249}
+\date{}
+\maketitle
+
+\begin{abstract}
+\noindent
+Marine heatwaves (MHWs) are among the most consequential climate extremes for fish populations and fisheries, yet the methods used to quantify their biological impacts remain inconsistent. This review synthesises 76 empirical studies published between 2016 and 2025 that applied an explicit event based MHW definition to marine fauna, examining how thermal exposure was characterised, how biological responses were classified, and which modelling frameworks linked the two. Association models, principally generalised linear and additive models, account for more than 60\% of studies; frameworks that parameterise temporal or spatial dependence appear in fewer than 10\%. To test whether these habits matter for inference, a factorial Monte Carlo study implemented entirely in R applied six model classes to responses simulated from real NOAA OISST sea surface temperature series for three regions, across \nScenarios{} scenarios, \nReplicates{} replicates and \nFits{} model fits. Omitting a one year response lag reduced the apparent magnitude of the exposure effect by \naiveRelBiasLagOne{}\% on average; nominal 95\% confidence intervals from linear models covered the true coefficient in \linearCoverageRange{} of scenarios, against \dlnmCoverage{} for a distributed lag model. The best model for recovering the coefficient was not the best model for out of sample prediction. These results motivate a seven step workflow, minimum reporting standards and a pitfalls table, delivered as open, tested R code, so that attribution and forecasting of MHW impacts rest on methods whose behaviour has been measured rather than assumed.
+\end{abstract}
+
+\noindent\textbf{Keywords:} marine heatwaves; fisheries impacts; distributed lag models; exposure metrics; reproducible workflows; simulation study
+
+\section{Introduction}\label{sec:intro}
+
+Marine heatwaves (MHWs), prolonged periods of anomalously warm sea surface temperature, have moved from oceanographic curiosity to a leading explanation for abrupt change in fish populations and fisheries \citep{hobday2016,smale2019}. The 2011 event off Western Australia reorganised invertebrate fisheries within a season \citep{caputi2016}, the 2014--2016 Northeast Pacific event depressed recruitment of walleye pollock and Pacific cod \citep{rogers2021,barbeaux2020}, and repeated events in semi enclosed seas push resident fauna towards their upper thermal limits \citep{benhasan2019}. Projections indicate increasing frequency and intensity under continued warming \citep{frolicher2018,cheng2022}, which places MHW impact assessment squarely within the remit of fisheries science.
+
+The evidence base has grown quickly, but not evenly. Studies differ in how they define thermal exposure, in which biological endpoints they measure, and in the statistical frameworks that connect the two \citep{smith2025,fredston2023}. Earlier reviews documented biological outcomes and ecosystem consequences \citep{smale2019,holbrook2022}; none has examined the methodological architecture beneath those findings, and none has tested whether common analytical choices change the answers that studies report. The second omission matters. If the dominant approach in the literature systematically misestimates the effect of exposure under conditions that are typical of fisheries data, then comparisons across studies, meta analytic syntheses and management advice all inherit that error.
+
+This review addresses both gaps in sequence. Section~\ref{sec:synthesis} synthesises the methods of 76 MHW specific empirical studies, structured around exposure characterisation, response classification and modelling frameworks, with a bibliometric view of where the research is done and by whom; it closes by naming three structural problems the synthesis exposes. Section~\ref{sec:simulation} tests the second of those problems directly: a simulation study, implemented entirely in R with the packages the review recommends, applies six model classes to biological responses generated from real sea surface temperature series under a known data generating process, so that bias, interval coverage and predictive skill can be measured rather than argued about. Section~\ref{sec:roadmap} translates both strands into a workflow, reporting standards and a pitfalls table, delivered as open and tested code.
+
+The simulation is deliberately modest in ambition. It does not claim to represent any particular fishery, and its findings are statements about model behaviour under the conditions simulated. Where those conditions resemble the data structures that dominate the reviewed literature, the results have direct bearing on practice; where they do not, the repository allows readers to change the design and rerun it.
+
+\input{sections/synthesis.tex}
+\input{sections/simulation.tex}
+\input{sections/roadmap.tex}
+\input{sections/discussion.tex}
+
+\section*{Declarations}
+\paragraph{Data availability.} The complete R implementation, raw simulation outputs (one row per model fit), summary tables, figure scripts and the LaTeX source of this article are deposited at \url{https://github.com/EAfrifa-Yamoah/mhw-R-audit} and archived at Zenodo (DOI to be inserted at acceptance). The sea surface temperature series are the example data distributed with the heatwaveR package. The literature extraction table is provided as Online Resource 2.
+\paragraph{Funding.} No specific funding was received for this work.
+\paragraph{Competing interests.} The author declares no competing interests.
+
+\bibliography{refs}
+
+\end{document}
